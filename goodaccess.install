@@ -1,0 +1,41 @@
+_stop_service() {
+  systemctl stop goodaccess.service >/dev/null 2>&1 || true
+  pkill -f /usr/share/GoodAccess/service/GoodAccessService >/dev/null 2>&1 || true
+  rm -f /tmp/CoreFxPipe_GoodAccessPipe* >/dev/null 2>&1 || true
+}
+
+_load_apparmor() {
+  if [ -x /usr/bin/apparmor_parser ] && [ -d /sys/kernel/security/apparmor ]; then
+    apparmor_parser -r /etc/apparmor.d/goodaccess >/dev/null 2>&1 || true
+  fi
+}
+
+post_install() {
+  systemctl daemon-reload >/dev/null 2>&1 || true
+  _load_apparmor
+  echo ":: Enable the GoodAccess service with: systemctl enable --now goodaccess.service"
+  echo ":: GoodAccess manages DNS through systemd-resolved; enable it if you haven't:"
+  echo "   systemctl enable --now systemd-resolved.service"
+}
+
+pre_upgrade() {
+  _stop_service
+}
+
+post_upgrade() {
+  systemctl daemon-reload >/dev/null 2>&1 || true
+  _load_apparmor
+  if systemctl is-enabled --quiet goodaccess.service 2>/dev/null; then
+    systemctl restart goodaccess.service >/dev/null 2>&1 || true
+  fi
+}
+
+pre_remove() {
+  systemctl disable --now goodaccess.service >/dev/null 2>&1 || true
+  _stop_service
+}
+
+post_remove() {
+  systemctl daemon-reload >/dev/null 2>&1 || true
+  echo ":: Runtime data in /opt/GoodAccess was left in place; remove it manually if unwanted."
+}
