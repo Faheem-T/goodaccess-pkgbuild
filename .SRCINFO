@@ -1,7 +1,7 @@
 pkgbase = goodaccess
 	pkgdesc = Zero-trust network access and VPN client (repackaged from the official .deb)
 	pkgver = 4.8.0
-	pkgrel = 1
+	pkgrel = 2
 	url = https://www.goodaccess.com
 	install = goodaccess.install
 	arch = x86_64
@@ -20,6 +20,7 @@ pkgbase = goodaccess
 	depends = dmidecode
 	depends = bash
 	depends = wireguard-tools
+	depends = resolvconf
 	depends = iproute2
 	depends = iptables
 	depends = polkit

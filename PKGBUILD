@@ -1,7 +1,7 @@
 pkgname=goodaccess
 pkgver=4.8.0
 _debrel=1
-pkgrel=1
+pkgrel=2
 pkgdesc="Zero-trust network access and VPN client (repackaged from the official .deb)"
 arch=('x86_64')
 url="https://www.goodaccess.com"
@@ -21,6 +21,7 @@ depends=(
   'dmidecode'
   'bash'
   'wireguard-tools'
+  'resolvconf'
   'iproute2'
   'iptables'
   'polkit'
