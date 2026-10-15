@@ -1,5 +1,5 @@
 pkgname=goodaccess
-pkgver=4.7.2
+pkgver=4.8.0
 _debrel=1
 pkgrel=1
 pkgdesc="Zero-trust network access and VPN client (repackaged from the official .deb)"
@@ -20,12 +20,16 @@ depends=(
   'iputils'
   'dmidecode'
   'bash'
+  'wireguard-tools'
+  'iproute2'
+  'iptables'
+  'polkit'
 )
 options=('!strip' '!debug')
 install=goodaccess.install
 source=("https://goodaccess-storage.b-cdn.net/applications/prod/linux/repos/deb/pool/main/${pkgname}_${pkgver}-${_debrel}_amd64.deb")
 noextract=("${pkgname}_${pkgver}-${_debrel}_amd64.deb")
-sha256sums=('2761e4923eb697c181bc29151c137f722846f1982b413adae7aeef21dffd69a2')
+sha256sums=('9ceb57611e2f4ebdcd7a13ced2dbeb6110d339996c26055494d48f9c79439364')
 
 package() {
   bsdtar -xOf "${pkgname}_${pkgver}-${_debrel}_amd64.deb" 'data.tar.*' | bsdtar -xpf - -C "$pkgdir"
@@ -35,5 +39,5 @@ package() {
   rmdir "$pkgdir/lib"
 
   rm -rf "$pkgdir/usr/share/doc"
-  rmdir "$pkgdir/etc/xdg"
+  rm -rf "$pkgdir/etc/xdg"
 }

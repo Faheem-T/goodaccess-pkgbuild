@@ -1,6 +1,6 @@
 pkgbase = goodaccess
 	pkgdesc = Zero-trust network access and VPN client (repackaged from the official .deb)
-	pkgver = 4.7.2
+	pkgver = 4.8.0
 	pkgrel = 1
 	url = https://www.goodaccess.com
 	install = goodaccess.install
@@ -19,10 +19,14 @@ pkgbase = goodaccess
 	depends = iputils
 	depends = dmidecode
 	depends = bash
-	noextract = goodaccess_4.7.2-1_amd64.deb
+	depends = wireguard-tools
+	depends = iproute2
+	depends = iptables
+	depends = polkit
+	noextract = goodaccess_4.8.0-1_amd64.deb
 	options = !strip
 	options = !debug
-	source = https://goodaccess-storage.b-cdn.net/applications/prod/linux/repos/deb/pool/main/goodaccess_4.7.2-1_amd64.deb
-	sha256sums = 2761e4923eb697c181bc29151c137f722846f1982b413adae7aeef21dffd69a2
+	source = https://goodaccess-storage.b-cdn.net/applications/prod/linux/repos/deb/pool/main/goodaccess_4.8.0-1_amd64.deb
+	sha256sums = 9ceb57611e2f4ebdcd7a13ced2dbeb6110d339996c26055494d48f9c79439364
 
 pkgname = goodaccess
